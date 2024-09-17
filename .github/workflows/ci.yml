@@ -43,6 +43,9 @@ jobs:
       - name: Test
         run: pnpm exec nx affected -t test --verbose --configuration=ci
 
+      - name: E2E Test
+        run: pnpm exec nx affected -t test:e2e --verbose
+
       - name: Coverage
         run: pnpm exec nx run fastify-app:test --configuration=coverage
 

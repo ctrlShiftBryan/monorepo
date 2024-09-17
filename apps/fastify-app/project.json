@@ -65,6 +65,12 @@
         }
       }
     },
+    "test:e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm vitest run --config ./vite.config.e2e.ts"
+      }
+    },
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/fastify-app/Dockerfile . -t fastify-app"

@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     deps: {
-      inline: ["@fastify/autoload"],
+      inline: ['@fastify/autoload'],
     },
     globals: true,
     environment: 'node',
@@ -16,17 +16,13 @@ export default defineConfig({
         '**/node_modules/**',
         '**/*.d.ts',
         '**/*.test.ts',
-        '**/vitest.config.ts',
+        '**/vite.config.ts',
+        '**/vite.config.e2e.ts',
         'tmp/**',
-        // Add more specific exclusions here
         'apps/fastify-app/src/main.ts',
         'apps/fastify-app/src/app/plugins/**',
         'apps/fastify-app/src/app/routes/**',
       ],
-      // You can also use 'include' to explicitly specify files to include
-      // include: [
-      //   'apps/fastify-app/src/**/*.ts',
-      // ],
     },
   },
 });
