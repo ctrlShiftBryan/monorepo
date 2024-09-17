@@ -2,7 +2,13 @@
   "name": "@monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run fastify-app:serve --configuration=development",
+    "start": "nx run fastify-app:serve",
+    "test": "nx run fastify-app:test",
+    "build": "nx run fastify-app:build",
+    "lint": "nx run fastify-app:lint"
+  },
   "private": true,
   "devDependencies": {
     "@nx/esbuild": "19.7.3",
@@ -10,6 +16,7 @@
     "@nx/eslint-plugin": "19.7.3",
     "@nx/js": "19.7.3",
     "@nx/node": "19.7.3",
+    "@nx/vite": "^19.7.3",
     "@nx/workspace": "19.7.3",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
@@ -17,11 +24,14 @@
     "@types/node": "~18.16.9",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
+    "@vitest/coverage-c8": "^0.33.0",
     "esbuild": "^0.19.2",
     "eslint": "~8.57.0",
     "eslint-config-prettier": "^9.0.0",
+    "get-port": "^7.1.0",
     "nx": "19.7.3",
     "prettier": "^2.6.2",
+    "supertest": "^7.0.0",
     "typescript": "~5.5.2",
     "vitest": "^2.1.1"
   },

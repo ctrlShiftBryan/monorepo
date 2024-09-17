@@ -4,12 +4,11 @@
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
 ## Finish your CI setup
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/MsmufnifDB)
-
 
 ## Run tasks
 
@@ -34,6 +33,7 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 
 To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
+
 ```sh
 npx nx add @nx/react
 ```
@@ -52,7 +52,6 @@ You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx 
 
 [Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-
 [Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 ## Install Nx Console
@@ -65,13 +64,82 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 Learn more:
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 And join the Nx community:
+
 - [Discord](https://go.nx.dev/community)
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## Testing Strategy: Integration vs E2E Tests
+
+Our project employs both integration and end-to-end (E2E) tests using Supertest and fetch API respectively. Understanding the differences and use cases for each is crucial for maintaining a robust test suite.
+
+### Integration Tests with Supertest
+
+Integration tests verify that different parts of the application work together correctly. We use Supertest for these tests.
+
+Pros:
+
+- Fast execution compared to full E2E tests
+- Tests the full HTTP stack without external network calls
+- Simulates HTTP requests without starting a real server
+- Good for testing API endpoints and middleware
+
+Cons:
+
+- Doesn't test real-world scenarios like CORS or network latency
+- May not catch issues related to the actual server listening process
+
+Example usage:
+
+```typescript
+const response = await request.get('/');
+expect(response.status).toBe(200);
+expect(response.body).toEqual({ message: 'Hello API' });
+```
+
+### E2E Tests with Fetch API
+
+E2E tests simulate real-world usage of the application. We use the Fetch API for these tests.
+
+Pros:
+
+- Tests the application as a real user or client would
+- Catches issues related to CORS, real network behavior, and server listening
+- Verifies the entire system works together in a production-like environment
+
+Cons:
+
+- Slower execution due to actual network calls
+- Requires managing server lifecycle (start/stop) for tests
+- May be less stable due to network dependencies
+
+Example usage:
+
+```typescript
+const response = await fetch(`${baseUrl}/`);
+const data = await response.json();
+expect(response.status).toBe(200);
+expect(data).toEqual({ message: 'Hello API' });
+```
+
+### When to Use Each
+
+- Use Supertest (Integration Tests) for:
+
+  - Testing API endpoints
+  - Verifying middleware behavior
+  - Checking request/response handling
+
+- Use Fetch API (E2E Tests) for:
+  - Simulating real client-server interactions
+  - Testing CORS and other network-related behaviors
+  - Verifying the application works in a production-like environment
+
+By combining both approaches, we ensure comprehensive test coverage while maintaining a balance between test speed and real-world scenario validation.
