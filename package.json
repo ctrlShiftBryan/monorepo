@@ -8,7 +8,9 @@
     "test": "nx run fastify-app:test",
     "test:coverage": "nx run fastify-app:test -- --coverage",
     "build": "nx run fastify-app:build",
-    "lint": "nx run fastify-app:lint"
+    "lint": "nx run fastify-app:lint",
+    "format:check": "nx format:check",
+    "format": "nx format"
   },
   "private": true,
   "devDependencies": {
