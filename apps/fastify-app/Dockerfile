@@ -35,8 +35,9 @@ WORKDIR /app
 RUN addgroup --system fastify-app && \
     adduser --system -G fastify-app fastify-app
 
-# Copy built assets from the builder stage
+# Copy built assets and node_modules from the builder stage
 COPY --from=builder /app/dist/apps/fastify-app ./
+COPY --from=builder /app/node_modules ./node_modules
 
 RUN chown -R fastify-app:fastify-app .
 
