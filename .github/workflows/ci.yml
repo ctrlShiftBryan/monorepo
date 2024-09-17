@@ -40,12 +40,15 @@ jobs:
       - name: Test
         run: pnpm exec nx affected -t test --verbose --configuration=ci
 
+      - name: Coverage
+        run: pnpm exec nx run fastify-app:test --configuration=coverage
+
       - name: Build
         run: pnpm exec nx affected -t build --verbose
 
-      - name: Upload test results
+      - name: Upload coverage report
         uses: actions/upload-artifact@v3
-        if: always()
         with:
-          name: test-results
+          name: coverage-report
           path: coverage/
+          retention-days: 7
