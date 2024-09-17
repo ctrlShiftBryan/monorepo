@@ -4,7 +4,28 @@
 # Tip: Modify "docker-build" options in project.json to change docker build args.
 #
 # Run the container with `docker run -p 3000:3000 -t fastify-app`.
-FROM docker.io/node:lts-alpine
+# Build stage
+FROM node:lts-alpine as builder
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package.json and pnpm-lock.yaml
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application
+RUN pnpm exec nx build fastify-app
+
+# Production stage
+FROM node:lts-alpine
 
 ENV HOST=0.0.0.0
 ENV PORT=3000
@@ -12,13 +33,13 @@ ENV PORT=3000
 WORKDIR /app
 
 RUN addgroup --system fastify-app && \
-          adduser --system -G fastify-app fastify-app
+    adduser --system -G fastify-app fastify-app
 
-COPY dist/apps/fastify-app fastify-app/
+# Copy built assets from the builder stage
+COPY --from=builder /app/dist/apps/fastify-app ./
+
 RUN chown -R fastify-app:fastify-app .
 
-# You can remove this install step if you build with `--bundle` option.
-# The bundled output will include external dependencies.
-RUN npm --prefix fastify-app --omit=dev -f install
+USER fastify-app
 
-CMD [ "node", "fastify-app" ]
+CMD [ "node", "main.js" ]

@@ -15,6 +15,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@nx-tools/nx-prisma": "^6.1.0",
     "@nx/esbuild": "19.7.3",
     "@nx/eslint": "19.7.3",
     "@nx/eslint-plugin": "19.7.3",
