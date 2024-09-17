@@ -5,9 +5,30 @@
   "scripts": {},
   "private": true,
   "devDependencies": {
+    "@nx/esbuild": "19.7.3",
+    "@nx/eslint": "19.7.3",
+    "@nx/eslint-plugin": "19.7.3",
     "@nx/js": "19.7.3",
     "@nx/node": "19.7.3",
     "@nx/workspace": "19.7.3",
-    "nx": "19.7.3"
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
+    "@types/node": "~18.16.9",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "esbuild": "^0.19.2",
+    "eslint": "~8.57.0",
+    "eslint-config-prettier": "^9.0.0",
+    "nx": "19.7.3",
+    "prettier": "^2.6.2",
+    "typescript": "~5.5.2"
+  },
+  "dependencies": {
+    "@fastify/autoload": "~5.7.1",
+    "@fastify/sensible": "~5.2.0",
+    "fastify": "~4.13.0",
+    "fastify-plugin": "~4.5.0",
+    "tslib": "^2.3.0"
   }
 }

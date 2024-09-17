@@ -1,0 +1,1 @@
+pnpm exec nx generate @nx/node:application --name=fastify-app --bundler=esbuild --directory=apps/fastify-app --framework=fastify --e2eTestRunner=none --projectNameAndRootFormat=as-provided --unitTestRunner=none
