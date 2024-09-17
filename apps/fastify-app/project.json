@@ -59,6 +59,10 @@
       "options": {
         "command": "pnpm vitest run"
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/fastify-app/Dockerfile . -t fastify-app"
     }
   }
 }
