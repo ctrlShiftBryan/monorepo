@@ -6,7 +6,7 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     deps: {
-      inline: ["@fastify/autoload"],
+      inline: ['@fastify/autoload'],
     },
   },
 });
