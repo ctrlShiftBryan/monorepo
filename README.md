@@ -290,7 +290,7 @@ Let's explore how a feature, such as `User`, is implemented following this struc
       {
         preHandler: [validateRequestBody(createUserSchema)],
       },
-      registerUserHandler,
+      registerUserHandler
     );
 
     app.get(
@@ -298,7 +298,7 @@ Let's explore how a feature, such as `User`, is implemented following this struc
       {
         preHandler: [validateRequestParams(userIdSchema)],
       },
-      getUserProfileHandler,
+      getUserProfileHandler
     );
   };
 
